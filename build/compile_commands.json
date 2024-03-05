@@ -1,7 +1,0 @@
-[
-{
-  "directory": "C:/Users/Nils/Desktop/git/Maze_Genertor_Solver/build",
-  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/main.dir/includes_CXX.rsp -g -o CMakeFiles\\main.dir\\src\\main.cpp.obj -c C:\\Users\\Nils\\Desktop\\git\\Maze_Genertor_Solver\\src\\main.cpp",
-  "file": "C:/Users/Nils/Desktop/git/Maze_Genertor_Solver/src/main.cpp"
-}
-]
