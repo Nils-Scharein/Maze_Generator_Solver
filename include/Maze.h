@@ -4,16 +4,22 @@
 #include <vector>
 #include <Cell.h>
 
-class Matrix
+class Maze
 {
 public:
     // constructor + deconstructor
-    Matrix(int h, int w);
-    ~Matrix();
+    Maze(int h, int w);
+    ~Maze();
+
+    // Public here
+    std::vector<std::vector<Cell>> get_maze() { return grid; };
 
     // public attributes
     bool create_matrix();
-    bool print_matrix() const;
+    bool print_current_2D_Map() const;
+    bool generate_maze_recursive_backtracker();
+    bool generate_maze_kruskal();
+    bool generate_maze_prim();
 
 private:
     // private attribbutes

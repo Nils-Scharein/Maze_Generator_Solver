@@ -1,17 +1,18 @@
-#include "Matrix.h"
+#include "Maze.h"
 #include "Cell.h"
 #include <vector>
 
-Matrix::Matrix(int h, int w)
+Maze::Maze(int h, int w)
     : hight{h}, wight{w}
 {
+    create_matrix();
 }
 
-Matrix::~Matrix()
+Maze::~Maze()
 {
 }
 
-bool Matrix::create_matrix()
+bool Maze::create_matrix()
 {
     for (int i = 0; i < hight; i++)
     {
@@ -27,7 +28,7 @@ bool Matrix::create_matrix()
     return true;
 };
 
-bool Matrix::print_matrix() const
+bool Maze::print_current_2D_Map() const
 {
     std::cout << "The Current Grid has a Height of " << hight << " and a wight of " << wight << " with " << Cell::get_num_cells << " Cells."
               << "\n"
