@@ -7,13 +7,11 @@
 Maze::Maze(int h, int w)
     : hight{h}, wight{w}
 {
-    create_matrix();
+    // create_matrix();
 }
 
-Maze::~Maze()
-{
-}
-
+Maze::~Maze() {}
+/*
 bool Maze::create_matrix()
 {
     for (int i = 0; i < hight; i++)
@@ -44,3 +42,4 @@ bool Maze::print_current_2D_Map() const
     }
     return true;
 };
+*/

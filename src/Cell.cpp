@@ -2,10 +2,13 @@
 #include <iostream>
 #include "SFML/Graphics.hpp"
 
-Cell::Cell()
-    : type{"None"}, visited{false}, is_active{false}
+Cell::Cell(int x, int y, float size)
+    : x{x}, y{y}, type{"None"}, visited{false}, size{size}
 {
     // TODO: Add SFML creation of the Cell with the Walls
+    cell_body.setSize(sf::Vector2f(size, size));
+    cell_body.setFillColor(sf::Color::Blue);
+    cell_body.setPosition(x, y);
 }
 
 Cell::~Cell()
@@ -53,11 +56,8 @@ void Cell::set_type(Type type)
 void Cell::draw(sf::RenderWindow &window)
 {
     sf::RectangleShape rect;
-    if (is_active)
-    {
-        rect.setFillColor(sf::Color::Black);
-        rect.setSize(sf::Vector2(size, size));
-        rect.setPosition(x, y);
-        window.draw(rect);
-    }
+    rect.setFillColor(sf::Color::Yellow);
+    rect.setSize(sf::Vector2f(size, size));
+    rect.setPosition(x, y);
+    window.draw(rect);
 }

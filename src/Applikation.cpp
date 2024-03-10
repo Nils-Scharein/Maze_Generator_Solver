@@ -13,12 +13,22 @@ void Applikation::poolevent(sf::RenderWindow &window)
     }
 }
 
-void Applikation::run(sf::RenderWindow &window)
-{
-    poolevent(window);
-}
-
-void update_maze()
+void Applikation::update_maze(sf::RenderWindow &window)
 {
     // TODO: Dession + Create + Render Maze Generator // Maze Solver comes later
+    Cell test(0, 0, 50.00);
+    Cell test2(50, 0, 50.00);
+    window.clear();
+    test.draw(window);
+    test2.draw(window);
+    window.display();
+}
+
+void Applikation::run(sf::RenderWindow &window)
+{
+    while (window.isOpen())
+    {
+        poolevent(window);
+        update_maze(window);
+    }
 }

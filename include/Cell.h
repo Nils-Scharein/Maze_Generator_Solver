@@ -7,15 +7,11 @@
 class Cell
 {
 private:
-    // static
-    // FIXME: num_cells to show correct number (Need to add in Copyconstrucor, that increase number and copy all the values)
-    static int num_cells;
     // private attribbutes
     int x, y;
     bool visited;
-    bool is_active;
     float size = 30.f;
-    float thickness = 2.f;
+    float thickness_wall = 2.f;
     bool walls[4] = {true, true, true, true}; // sets if the Cell has Walls or not
     std::string type;                         // TODO:DELETE
 
@@ -30,7 +26,7 @@ private:
 
 public:
     // constructor + deconstructor
-    Cell();
+    Cell(int x, int y, float size);
     ~Cell();
 
     // public attributes
