@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.5)
 project(Maze_Generator_Solvere)
 
+set(CMAKE_POLICY_DEFAULT_CMP0135 NEW)
+
 # Set SFML version
 set(SFML_VERSION "2.6.1")
 
