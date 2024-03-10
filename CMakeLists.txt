@@ -6,28 +6,19 @@ set(CMAKE_POLICY_DEFAULT_CMP0135 NEW)
 # Set SFML version
 set(SFML_VERSION "2.6.1")
 
-# Set SFML directory
-set(SFML_DIR "${CMAKE_BINARY_DIR}/SFML-${SFML_VERSION}")
-
 #include
 include_directories(include)
 
 # Fetch SFML
 include(FetchContent)
+set(BUILD_SHARED_LIBS OFF)
 FetchContent_Declare(
     SFML
-    URL "https://www.sfml-dev.org/files/SFML-${SFML_VERSION}-sources.zip"
+    GIT_REPOSITORY https://github.com/SFML/SFML.git
+    GIT_TAG        "2.6.1"  # Stelle sicher, dass dies mit der SFML-Version übereinstimmt, die du verwenden möchtest
 )
-FetchContent_GetProperties(SFML)
-if(NOT SFML_POPULATED)
-    FetchContent_Populate(SFML)
-    add_subdirectory(${SFML_SOURCE_DIR} ${SFML_BINARY_DIR})
-endif()
-
-# Include SFML
-include_directories(${SFML_DIR}/include)
-link_directories(${SFML_DIR}/lib)
-set(SFML_LIBRARIES sfml-graphics sfml-window sfml-system)
+FetchContent_MakeAvailable(SFML)
+set(CMAKE_CXX_STANDARD 17)
 
 # Add your project files
 file(GLOB SOURCES
@@ -38,4 +29,4 @@ file(GLOB SOURCES
 add_executable(Maze_Generator_Solvere ${SOURCES})
 
 # Link SFML libraries
-target_link_libraries(Maze_Generator_Solvere ${SFML_LIBRARIES})
+target_link_libraries(Maze_Generator_Solvere sfml-graphics)
