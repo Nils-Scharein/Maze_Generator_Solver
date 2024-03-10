@@ -2,6 +2,7 @@
 #include "Cell.h"
 #include <vector>
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 Maze::Maze(int h, int w)
     : hight{h}, wight{w}
@@ -31,7 +32,7 @@ bool Maze::create_matrix()
 
 bool Maze::print_current_2D_Map() const
 {
-    std::cout << "The Current Grid has a Height of " << hight << " and a wight of " << wight << " with " << Cell::get_num_cells << " Cells."
+    std::cout << "The Current Grid has a Height of " << hight << " and a wight of " << wight
               << std::endl;
     for (int i = 0; i < hight; i++)
     {

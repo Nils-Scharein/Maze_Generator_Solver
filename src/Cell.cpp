@@ -1,17 +1,15 @@
 #include "Cell.h"
+#include <iostream>
 #include "SFML/Graphics.hpp"
-
-int Cell::num_cells = 0;
 
 Cell::Cell()
     : type{"None"}, visited{false}, is_active{false}
 {
-    num_cells++;
+    // TODO: Add SFML creation of the Cell with the Walls
 }
 
 Cell::~Cell()
 {
-    num_cells--;
 }
 
 bool Cell::set_cell_type(std::string t)
@@ -37,7 +35,22 @@ bool Cell::print_cell_2D() const
     return true;
 }
 
-bool Cell::draw(sf::RenderWindow &window) const
+void Cell::set_type(Type type)
+{
+    switch (type)
+    {
+    case (Type::Start):
+        break;
+    case (Type::Ende):
+        break;
+    case (Type::Visited):
+        break;
+    case (Type::Neutral):
+        break;
+    }
+}
+
+void Cell::draw(sf::RenderWindow &window)
 {
     sf::RectangleShape rect;
     if (is_active)
@@ -47,6 +60,4 @@ bool Cell::draw(sf::RenderWindow &window) const
         rect.setPosition(x, y);
         window.draw(rect);
     }
-
-    return true;
 }

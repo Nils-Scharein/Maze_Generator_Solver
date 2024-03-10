@@ -27,11 +27,10 @@ int main()
         {
             if (event.type == sf::Event::Closed)
                 window.close();
+            if (event.type == sf::Event::KeyPressed)
+                if (sf::Keyboard::Escape)
+                    window.close();
         }
-
-        Maze tes(5, 5);
-        tes.create_matrix();
-        tes.print_current_2D_Map();
     }
 
     return 0;

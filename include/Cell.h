@@ -1,8 +1,7 @@
 #ifndef Cell_H
 #define Cell_H
 
-#include <string>
-#include <iostream>
+#include <string> //TODO: DELETE
 #include <SFML/Graphics.hpp>
 
 class Cell
@@ -17,8 +16,17 @@ private:
     bool is_active;
     float size = 30.f;
     float thickness = 2.f;
-    bool walls[4] = {true, true, true, true};
-    std::string type;
+    bool walls[4] = {true, true, true, true}; // sets if the Cell has Walls or not
+    std::string type;                         // TODO:DELETE
+
+    // For Setting the Tyoe of the Cell
+    enum class Type
+    {
+        Start,
+        Ende,
+        Visited,
+        Neutral
+    };
 
 public:
     // constructor + deconstructor
@@ -27,7 +35,6 @@ public:
 
     // public attributes
     // declared inside
-    static int get_num_cells() { return num_cells; };
 
     // declared outside
     // TODO: declare most of these funcs in cpp file
@@ -47,7 +54,17 @@ public:
     bool set_color();
     bool set_type();
     bool print_cell_2D() const;
-    bool draw(sf::RenderWindow &window) const;
+
+    void draw(sf::RenderWindow &window);
+    void set_type(Type type);
+
+    // set SFML Shapes for Walls
+    sf::RectangleShape wall_n;
+    sf::RectangleShape wall_s;
+    sf::RectangleShape wall_r;
+    sf::RectangleShape wall_l;
+
+    sf::RectangleShape cell_body;
 };
 
 #endif // Cell_H
