@@ -4,7 +4,7 @@
 int Cell::num_cells = 0;
 
 Cell::Cell()
-    : type{"None"}, color{"black"}, visited{false}
+    : type{"None"}, visited{false}, is_active{false}
 {
     num_cells++;
 }
@@ -20,7 +20,7 @@ bool Cell::set_cell_type(std::string t)
     return true;
 }
 
-bool Cell::print_Cell() const
+bool Cell::print_cell_2D() const
 {
     if (type == "None")
     {
@@ -34,5 +34,19 @@ bool Cell::print_Cell() const
     {
         std::cout << " P ";
     }
+    return true;
+}
+
+bool Cell::draw(sf::RenderWindow &window) const
+{
+    sf::RectangleShape rect;
+    if (is_active)
+    {
+        rect.setFillColor(sf::Color::Black);
+        rect.setSize(sf::Vector2(size, size));
+        rect.setPosition(x, y);
+        window.draw(rect);
+    }
+
     return true;
 }

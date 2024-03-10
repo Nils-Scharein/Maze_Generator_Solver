@@ -2,23 +2,23 @@
 #include <string>
 #include <Cell.h>
 #include <Maze.h>
-/*
-int main(int, char **)
-{
-    Maze tes(5, 5);
-    tes.create_matrix();
-    tes.print_current_2D_Map();
-
-    return true;
-}*/
-
 #include <SFML/Graphics.hpp>
+
+int WINDOW_HIGHT = 1000;
+int WINDOW_WIGHT = 600;
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+
+    sf::RenderWindow window(sf::VideoMode(WINDOW_HIGHT, WINDOW_WIGHT), "Maze Generator");
     sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+    sf::CircleShape test(250.f);
+    shape.setFillColor(sf::Color::Blue);
+    shape.setOutlineColor(sf::Color::Yellow);
+    shape.setOutlineThickness(10);
+    test.setFillColor(sf::Color::White);
+    test.setOutlineColor(sf::Color::Red);
+    test.setOutlineThickness(10);
 
     while (window.isOpen())
     {
@@ -29,9 +29,9 @@ int main()
                 window.close();
         }
 
-        window.clear();
-        window.draw(shape);
-        window.display();
+        Maze tes(5, 5);
+        tes.create_matrix();
+        tes.print_current_2D_Map();
     }
 
     return 0;
