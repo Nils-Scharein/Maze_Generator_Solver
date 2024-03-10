@@ -3,6 +3,7 @@
 #include <Cell.h>
 #include <Maze.h>
 #include <SFML/Graphics.hpp>
+#include <Applikation.h>
 
 int WINDOW_HIGHT = 1000;
 int WINDOW_WIGHT = 600;
@@ -20,17 +21,11 @@ int main()
     test.setOutlineColor(sf::Color::Red);
     test.setOutlineThickness(10);
 
+    Applikation api;
+
     while (window.isOpen())
     {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-            if (event.type == sf::Event::KeyPressed)
-                if (sf::Keyboard::Escape)
-                    window.close();
-        }
+        api.run(window);
     }
 
     return 0;
