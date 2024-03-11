@@ -7,17 +7,17 @@
 class Applikation
 {
 private:
-public:
-    Applikation()
-    {
-    }
-    ~Applikation()
-    {
-    }
+    int num_rows;
+    int num_columns;
+    sf::RenderWindow Applikation_window;
 
-    void poolevent(sf::RenderWindow &window);
-    void update_maze(sf::RenderWindow &window);
-    void run(sf::RenderWindow &window);
+public:
+    Applikation();
+
+    void poolevent();
+    void update_maze();
+    void run();
+    void render();
 };
 
 // TODO: implement Algorythemn to generate / solve Maze

@@ -1,66 +1,63 @@
 #ifndef Cell_H
 #define Cell_H
 
-#include <string> //TODO: DELETE
 #include <SFML/Graphics.hpp>
 
 class Cell
 {
 private:
-    // private attribbutes
-    int x, y;
-    bool visited;
-    float size = 30.f;
-    float thickness_wall = 2.f;
-    bool walls[4] = {true, true, true, true}; // sets if the Cell has Walls or not
-    std::string type;                         // TODO:DELETE
-
-    // For Setting the Tyoe of the Cell
-    enum class Type
+    // Decides Color and how to interact with the cell
+    enum Type
     {
         Start,
-        Ende,
+        End,
         Visited,
         Neutral
     };
 
+    // private attribbutes
+    int x, y;
+    bool visited;
+    bool isaktiv;
+    float size;
+    float thickness_wall;
+    Type cell_type = Neutral;
+
+    // Walls saved in array this way (Used for Color and conncetion)
+    // [0] = north
+    // [1] = East
+    // [2] = Soth
+    // [3] = West
+
+    bool walls[4] = {true, true, true, true}; // sets if the Cell has Walls or not
+
 public:
     // constructor + deconstructor
-    Cell(int x, int y, float size);
-    ~Cell();
+    Cell(int x, int y, float size, float wall_thiccnes);
 
-    // public attributes
-    // declared inside
+    // Getter
+    bool get_x(int x) const { return x; };
+    bool get_y(int y) const { return y; };
+    bool get_visited() const { return visited; };
+    bool get_isaktive() const { return isaktiv; };
 
-    // declared outside
-    // TODO: declare most of these funcs in cpp file
-    bool set_cell_type(std::string t);
-    bool set_x(int _x)
-    {
-        x = _x;
-        return true;
-    };
-    bool get_x(int x) { return x; };
-    bool set_y(int _y)
-    {
-        x = _y;
-        return true;
-    };
-    bool get_y(int y) { return y; };
-    bool set_color();
-    bool set_type();
-    bool print_cell_2D() const;
-
-    void draw(sf::RenderWindow &window);
+    // Setter
     void set_type(Type type);
+    void set_visited() { visited = true; };
+    void set_isaktive() { isaktiv = true; };
+    void setCellColor() const; // cell_body is mutable
+
+    // funcs
+    void draw(sf::RenderWindow &window) const;
+    void reset(sf::RenderWindow &window);
 
     // set SFML Shapes for Walls
     sf::RectangleShape wall_n;
+    sf::RectangleShape wall_e;
     sf::RectangleShape wall_s;
-    sf::RectangleShape wall_r;
-    sf::RectangleShape wall_l;
+    sf::RectangleShape wall_w;
 
-    sf::RectangleShape cell_body;
+    mutable sf::RectangleShape cell_body;
 };
 
 #endif // Cell_H
