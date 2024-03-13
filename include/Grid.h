@@ -21,13 +21,16 @@ public:
     // showing and creating funcs
     void create_grid();
     void draw_grid(sf::RenderWindow &window) const;
-    void reset();
+    void reset(sf::RenderWindow &window);
 
     // TODO: funcs for later Maze generating
-    std::vector<Cell> get_random_neighbor_unvited();
-    Cell get_Cell(int row, int colum);
+    std::vector<Cell *> get_unvisited_neighbours(int x, int y);
+    void connect_cells(Cell &cell1, Cell &cell2);
+    Cell &get_cell(int row, int colum);
+    Cell &get_random_cell();
+    Cell &select_random_cell(std::vector<Cell *> cells);
+    // TODO: Needed?
     void set_cell_active();
-    void connect_cells();
 };
 
 #endif

@@ -2,7 +2,7 @@
 #include <iostream>
 #include "SFML/Graphics.hpp"
 
-Cell::Cell(int x, int y, float size, float wall_thiccnes)
+Cell::Cell(int x, int y, int size, int wall_thiccnes)
     : x{x},
       y{y},
       visited{false},
@@ -10,30 +10,38 @@ Cell::Cell(int x, int y, float size, float wall_thiccnes)
       thickness_wall{wall_thiccnes},
       isaktiv{false}
 {
+    float cell_x = x * size;
+    float cell_y = y * size;
     sf::Color wall_color = sf::Color::Black;
-    sf::Color fill_color = sf::Color::Cyan;
+    sf::Color fill_color_transparent(0, 255, 255, 128);
 
+    cell_body.setFillColor(fill_color_transparent);
     cell_body.setSize(sf::Vector2f(size, size));
-    cell_body.setFillColor(fill_color);
-    cell_body.setPosition(x * size, y * size);
+    cell_body.setPosition(cell_x + thickness_wall, cell_y + thickness_wall);
 
-    wall_n.setSize(sf::Vector2f(size, thickness_wall));
-    wall_n.setPosition(sf::Vector2f(x * size, y * size));
     wall_n.setFillColor(wall_color);
+    wall_n.setSize(sf::Vector2f(size, thickness_wall));
+    wall_n.setPosition(sf::Vector2f(cell_x, cell_y));
 
-    wall_e.setSize(sf::Vector2f(size, thickness_wall));
-    wall_e.setPosition(sf::Vector2f(x * size + size, y * size));
     wall_e.setFillColor(wall_color);
-    wall_e.rotate(90);
+    wall_e.setSize(sf::Vector2f(thickness_wall, size));
+    wall_e.setPosition(sf::Vector2f(cell_x + size, cell_y));
 
-    wall_s.setSize(sf::Vector2f(size, thickness_wall));
-    wall_s.setPosition(sf::Vector2f(x * size, y * size + size));
     wall_s.setFillColor(wall_color);
+    wall_s.setSize(sf::Vector2f(size, thickness_wall));
+    wall_s.setPosition(sf::Vector2f(cell_x, cell_y + size));
 
-    wall_w.setSize(sf::Vector2f(size, thickness_wall));
-    wall_w.setPosition(sf::Vector2f(x * size, y * size));
     wall_w.setFillColor(wall_color);
-    wall_w.rotate(90);
+    wall_w.setSize(sf::Vector2f(thickness_wall, size));
+    wall_w.setPosition(sf::Vector2f(cell_x, cell_y));
+}
+
+void Cell::print_attributes()
+{
+    std::cout << "x: " << x << " y: " << y << std::endl;
+    std::cout << "Visited: " << visited << std::endl;
+    std::cout << "Aktive: " << isaktiv << std::endl;
+    std::cout << "Cell Type: " << cell_type << std::endl;
 }
 
 void Cell::set_type(Type type)
@@ -55,7 +63,7 @@ void Cell::set_type(Type type)
     }
 }
 
-void Cell::setCellColor() const
+void Cell::set_cellColor() const
 {
     switch (cell_type)
     {
@@ -76,7 +84,7 @@ void Cell::setCellColor() const
 
 void Cell::draw(sf::RenderWindow &window) const
 {
-    setCellColor();
+    set_cellColor();
     window.draw(cell_body);
     if (walls[0]) // North
         window.draw(wall_n);
@@ -94,4 +102,16 @@ void Cell::reset(sf::RenderWindow &window)
     isaktiv = false;
     visited = false;
     draw(window);
+}
+
+void Cell::turn_wall_off(int wall)
+{
+    if (wall == 0)
+        walls[0] = false;
+    if (wall == 1)
+        walls[1] = false;
+    if (wall == 2)
+        walls[2] = false;
+    if (wall == 3)
+        walls[3] = false;
 }

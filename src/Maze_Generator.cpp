@@ -7,5 +7,4 @@
 Maze::Maze(int h, int w)
     : hight{h}, wight{w}
 {
-    // create_matrix();
 }

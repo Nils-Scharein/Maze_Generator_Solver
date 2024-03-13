@@ -3,17 +3,11 @@
 #include <thread>
 #include <iostream>
 #include <Grid.h>
-
-int WINDOW_HIGHT = 1000;
-int WINDOW_WIGHT = 600;
-float CELLSIZE = 100;
-float WALLSIZE = 6;
+#include <random>
 
 Applikation::Applikation()
-    : Applikation_window(sf::VideoMode(WINDOW_HIGHT, WINDOW_WIGHT), "Maze Generator")
+    : Applikation_window(sf::VideoMode(WINDOW_WIGHT, WINDOW_HIGHT), "Maze Generator"), grid(num_rows, num_columns, CELLSIZE, WALLSIZE)
 {
-    num_rows = WINDOW_WIGHT / (int)CELLSIZE;
-    num_columns = WINDOW_HIGHT / (int)CELLSIZE;
 }
 
 void init_setup()
@@ -66,16 +60,6 @@ void Applikation::poolevent()
 void Applikation::update_maze()
 {
     // TODO: Dession + Create + Render Maze Generator // Maze Solver comes later
-
-    Applikation_window.clear(sf::Color::White);
-    bool a = true;
-    for (int i = 0; i < 10; i++)
-        for (int j = 0; j < 40; j++)
-        {
-            Cell temp(j, i, 40.00, 2);
-            temp.draw(Applikation_window);
-        }
-    Applikation_window.display();
 }
 
 void Applikation::run()
@@ -90,8 +74,7 @@ void Applikation::run()
 void Applikation::render()
 {
     Applikation_window.clear();
-
-    Grid test(num_rows, num_columns, CELLSIZE, WALLSIZE);
-    test.draw_grid(Applikation_window);
+    grid.connect_cells(grid.get_cell(4, 4), grid.select_random_cell(grid.get_unvisited_neighbours(4, 4)));
+    grid.draw_grid(Applikation_window);
     Applikation_window.display();
 }
