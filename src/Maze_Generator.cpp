@@ -5,8 +5,15 @@
 #include <stack>
 
 Maze_Generator::Maze_Generator()
-    : run_maze{true}, choise{choice_generator::depth_first}
+    : run_maze{false},
+      choise{choice_generator::depth_first},
+      deph_init{false}
 {
+}
+
+void Maze_Generator::toggle_run()
+{
+    run_maze = !run_maze;
 }
 
 void Maze_Generator::update_generate_with_choosen(Grid &grid, sf::RenderWindow &window)
@@ -15,22 +22,33 @@ void Maze_Generator::update_generate_with_choosen(Grid &grid, sf::RenderWindow &
     {
         if (choise == choice_generator::depth_first)
         {
-            depth_first_search_stack(*grid.get_cell(0, 0), grid, window);
-            run_maze = false;
+            depth_first_search_stack(grid, window);
         }
     }
 }
 
-void Maze_Generator::depth_first_search_stack(Cell current_cell, Grid &maze_grid, sf::RenderWindow &window)
+void Maze_Generator::depth_first_search_stack(Grid &maze_grid, sf::RenderWindow &window)
 {
-    maze_grid.draw_grid(window);
-    std::stack<Cell *> stack;
-    Cell *start_cell = maze_grid.get_cell(0, 0); // Store the pointer to the random cell
-    start_cell->set_visited();
-    start_cell->set_type(Type::Start);
-    maze_grid.get_cell((maze_grid.get_colums() - 1), (maze_grid.get_rows() - 1))->set_type(Type::End);
-    stack.push(start_cell);
-    while (!stack.empty())
+    if (!deph_init)
+    {
+        Cell *start_cell = maze_grid.get_cell(0, 0); // Store the pointer to the random cell
+        start_cell->set_visited();
+        start_cell->set_type(Type::Start);
+        maze_grid.get_cell((maze_grid.get_colums() - 1), (maze_grid.get_rows() - 1))->set_type(Type::End);
+        stack.push(start_cell);
+        maze_grid.draw_grid(window);
+        deph_init = true;
+    }
+    if (!run_maze)
+    {
+        return;
+    }
+    if (stack.empty())
+    {
+        run_maze = false;
+        return;
+    }
+    if (!stack.empty())
     {
         Cell *currentCell = stack.top();
 
@@ -58,5 +76,17 @@ void Maze_Generator::depth_first_search_stack(Cell current_cell, Grid &maze_grid
         // Display the updated window
         window.display();
     }
+}
+
+void Maze_Generator::reset(Grid &grid, sf::RenderWindow &window)
+{
+    window.clear();
+    grid.reset(window);
     run_maze = false;
+    while (!stack.empty())
+    {
+        stack.pop();
+    }
+    deph_init = false;
+    grid.draw_grid(window);
 }

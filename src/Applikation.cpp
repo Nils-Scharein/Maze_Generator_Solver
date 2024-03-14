@@ -29,18 +29,15 @@ void Applikation::poolevent()
             }
             else if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
             {
-                // TODO: Pause Generation
-                std::cout << "Pressed P\n";
+                maze_gen.toggle_run();
             }
             else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
             {
-                // TODO: Start der Simulation
-                std::cout << "Pressed S\n";
+                maze_gen.set_run_maze_on();
             }
             else if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
             {
-                // TODO: Reset Maze and Stop
-                std::cout << "Pressed R\n";
+                maze_gen.reset(grid, Applikation_window);
             }
             else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1))
             {
@@ -63,6 +60,7 @@ void Applikation::update_maze()
 
 void Applikation::run()
 {
+    grid.draw_grid(Applikation_window);
     while (Applikation_window.isOpen())
     {
         poolevent();
@@ -72,6 +70,6 @@ void Applikation::run()
 
 void Applikation::render()
 {
-    Applikation_window.clear(sf::Color::White);
     maze_gen.update_generate_with_choosen(grid, Applikation_window);
+    Applikation_window.display();
 }

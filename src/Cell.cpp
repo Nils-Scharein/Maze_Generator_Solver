@@ -109,12 +109,15 @@ void Cell::draw(sf::RenderWindow &window) const
         window.draw(wall_w);
 }
 
-// TODO: Check if works
 void Cell::reset(sf::RenderWindow &window)
 {
     isaktiv = false;
     visited = false;
-    draw(window);
+    for (int i = 0; i < 4; ++i)
+    {
+        walls[i] = true;
+    }
+    cell_type = Type::Neutral;
 }
 
 void Cell::turn_wall_off(int wall)
