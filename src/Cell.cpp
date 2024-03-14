@@ -46,23 +46,33 @@ void Cell::print_attributes()
 
 void Cell::set_type(Type type)
 {
+    // Check if the current type is already Start or End
+    if (cell_type == Start || cell_type == End)
+    {
+        // Preserve the current type
+        return;
+    }
+
+    // Otherwise, update the cell type based on the input type
     switch (type)
     {
-    case (Type::Start):
+    case Type::Start:
         cell_type = Start;
         break;
-    case (Type::End):
+    case Type::End:
         cell_type = End;
         break;
-    case (Type::Visited):
+    case Type::Visited:
         cell_type = Visited;
         break;
-    case (Type::Neutral):
+    case Type::Neutral:
         cell_type = Neutral;
+        break;
+    case Type::Finished:
+        cell_type = Finished;
         break;
     }
 }
-
 void Cell::set_cellColor() const
 {
     switch (cell_type)
@@ -77,6 +87,9 @@ void Cell::set_cellColor() const
         cell_body.setFillColor(sf::Color::Cyan);
         break;
     case Visited:
+        cell_body.setFillColor(sf::Color(255, 166, 0));
+        break;
+    case Finished:
         cell_body.setFillColor(sf::Color::Yellow);
         break;
     }

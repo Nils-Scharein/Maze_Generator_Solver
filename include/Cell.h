@@ -8,7 +8,8 @@ enum Type
     Start,
     End,
     Visited,
-    Neutral
+    Neutral,
+    Finished
 };
 class Cell
 {

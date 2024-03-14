@@ -11,8 +11,8 @@ class Applikation
 private:
     int CELLSIZE = 20;
     int WALLSIZE = 2;
-    int WINDOW_HIGHT = (600);
-    int WINDOW_WIGHT = (1200);
+    int WINDOW_HIGHT = (1200);
+    int WINDOW_WIGHT = (1800);
     int num_rows = WINDOW_HIGHT / (int)CELLSIZE;
     int num_columns = WINDOW_WIGHT / (int)CELLSIZE;
     sf::RenderWindow Applikation_window;

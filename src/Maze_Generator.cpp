@@ -23,15 +23,15 @@ void Maze_Generator::update_generate_with_choosen(Grid &grid, sf::RenderWindow &
 
 void Maze_Generator::depth_first_search_stack(Cell current_cell, Grid &maze_grid, sf::RenderWindow &window)
 {
+    maze_grid.draw_grid(window);
     std::stack<Cell *> stack;
     Cell *start_cell = maze_grid.get_cell(0, 0); // Store the pointer to the random cell
     start_cell->set_visited();
     start_cell->set_type(Type::Start);
+    maze_grid.get_cell((maze_grid.get_colums() - 1), (maze_grid.get_rows() - 1))->set_type(Type::End);
     stack.push(start_cell);
     while (!stack.empty())
     {
-        window.clear();
-        maze_grid.draw_grid(window);
         Cell *currentCell = stack.top();
 
         std::vector<Cell *> unvisited_neighbors = maze_grid.get_unvisited_neighbours(currentCell->get_x(), currentCell->get_y());
@@ -43,11 +43,16 @@ void Maze_Generator::depth_first_search_stack(Cell current_cell, Grid &maze_grid
             neighbour->set_visited();
             neighbour->set_type(Type::Visited);
             stack.push(neighbour); // Push the pointer to the neighbor cell
+            neighbour->draw(window);
+            window.display();
         }
         else
         {
             // If the current cell has no unvisited neighbors, backtrack
             stack.pop();
+            currentCell->set_type(Type::Finished);
+            currentCell->draw(window);
+            window.display();
         }
 
         // Display the updated window

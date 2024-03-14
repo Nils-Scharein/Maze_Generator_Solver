@@ -74,6 +74,4 @@ void Applikation::render()
 {
     Applikation_window.clear(sf::Color::White);
     maze_gen.update_generate_with_choosen(grid, Applikation_window);
-    grid.draw_grid(Applikation_window);
-    Applikation_window.display();
 }
