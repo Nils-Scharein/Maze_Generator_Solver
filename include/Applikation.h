@@ -4,11 +4,12 @@
 #include <SFML/Graphics.hpp>
 #include <cell.h>
 #include <Grid.h>
+#include <Mazegenerator.h>
 
 class Applikation
 {
 private:
-    int CELLSIZE = 80;
+    int CELLSIZE = 20;
     int WALLSIZE = 2;
     int WINDOW_HIGHT = (600);
     int WINDOW_WIGHT = (1200);
@@ -16,6 +17,7 @@ private:
     int num_columns = WINDOW_WIGHT / (int)CELLSIZE;
     sf::RenderWindow Applikation_window;
     Grid grid;
+    Maze_Generator maze_gen;
 
 public:
     Applikation();

@@ -6,13 +6,12 @@
 #include <random>
 
 Applikation::Applikation()
-    : Applikation_window(sf::VideoMode(WINDOW_WIGHT, WINDOW_HIGHT), "Maze Generator"), grid(num_rows, num_columns, CELLSIZE, WALLSIZE)
+    : Applikation_window(sf::VideoMode(WINDOW_WIGHT, WINDOW_HIGHT), "Maze Generator"),
+      grid(num_rows, num_columns, CELLSIZE, WALLSIZE),
+      maze_gen()
 {
 }
 
-void init_setup()
-{
-}
 void Applikation::poolevent()
 {
     sf::Event event;
@@ -73,8 +72,8 @@ void Applikation::run()
 
 void Applikation::render()
 {
-    Applikation_window.clear();
-    grid.connect_cells(grid.get_cell(4, 4), grid.select_random_cell(grid.get_unvisited_neighbours(4, 4)));
+    Applikation_window.clear(sf::Color::White);
+    maze_gen.update_generate_with_choosen(grid, Applikation_window);
     grid.draw_grid(Applikation_window);
     Applikation_window.display();
 }

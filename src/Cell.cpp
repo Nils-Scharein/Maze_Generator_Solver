@@ -13,27 +13,27 @@ Cell::Cell(int x, int y, int size, int wall_thiccnes)
     float cell_x = x * size;
     float cell_y = y * size;
     sf::Color wall_color = sf::Color::Black;
-    sf::Color fill_color_transparent(0, 255, 255, 128);
+    sf::Color Cell_color(0, 255, 255, 0);
 
-    cell_body.setFillColor(fill_color_transparent);
+    cell_body.setFillColor(Cell_color);
     cell_body.setSize(sf::Vector2f(size, size));
-    cell_body.setPosition(cell_x + thickness_wall, cell_y + thickness_wall);
+    cell_body.setPosition(cell_x, cell_y);
 
     wall_n.setFillColor(wall_color);
     wall_n.setSize(sf::Vector2f(size, thickness_wall));
-    wall_n.setPosition(sf::Vector2f(cell_x, cell_y));
+    wall_n.setPosition(sf::Vector2f(cell_x - thickness_wall, cell_y - thickness_wall));
 
     wall_e.setFillColor(wall_color);
     wall_e.setSize(sf::Vector2f(thickness_wall, size));
-    wall_e.setPosition(sf::Vector2f(cell_x + size, cell_y));
+    wall_e.setPosition(sf::Vector2f(cell_x + size - thickness_wall, cell_y));
 
     wall_s.setFillColor(wall_color);
     wall_s.setSize(sf::Vector2f(size, thickness_wall));
-    wall_s.setPosition(sf::Vector2f(cell_x, cell_y + size));
+    wall_s.setPosition(sf::Vector2f(cell_x, cell_y + size - thickness_wall));
 
     wall_w.setFillColor(wall_color);
     wall_w.setSize(sf::Vector2f(thickness_wall, size));
-    wall_w.setPosition(sf::Vector2f(cell_x, cell_y));
+    wall_w.setPosition(sf::Vector2f(cell_x - thickness_wall, cell_y));
 }
 
 void Cell::print_attributes()
@@ -55,8 +55,8 @@ void Cell::set_type(Type type)
         cell_type = End;
         break;
     case (Type::Visited):
-        break;
         cell_type = Visited;
+        break;
     case (Type::Neutral):
         cell_type = Neutral;
         break;
@@ -77,7 +77,7 @@ void Cell::set_cellColor() const
         cell_body.setFillColor(sf::Color::Cyan);
         break;
     case Visited:
-        cell_body.setFillColor(sf::Color::Blue);
+        cell_body.setFillColor(sf::Color::Yellow);
         break;
     }
 }

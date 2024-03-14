@@ -2,19 +2,17 @@
 #define Cell_H
 
 #include <SFML/Graphics.hpp>
-
+// Decides Color and how to interact with the cell
+enum Type
+{
+    Start,
+    End,
+    Visited,
+    Neutral
+};
 class Cell
 {
 private:
-    // Decides Color and how to interact with the cell
-    enum Type
-    {
-        Start,
-        End,
-        Visited,
-        Neutral
-    };
-
     // private attribbutes
     int x;
     int y;

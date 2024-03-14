@@ -4,18 +4,18 @@
 #include <random>
 #include <iostream>
 
-Grid::Grid(int rows, int colums, float cell_size, float wall_size)
+Grid::Grid(int rows, int colums, int cell_size, int wall_size)
     : num_rows{rows}, num_colums{colums}, cell_size{cell_size}, wall_size{wall_size}
 {
     create_grid();
 }
 
-Cell &Grid::get_cell(int colum, int row)
+Cell *Grid::get_cell(int column, int row)
 {
-    return cell_vec[row][colum];
+    return &cell_vec[row][column];
 }
 
-Cell &Grid::select_random_cell(std::vector<Cell *> cell_selection)
+Cell *Grid::select_random_cell(std::vector<Cell *> &cell_selection)
 {
     if (cell_selection.empty())
     {
@@ -24,22 +24,17 @@ Cell &Grid::select_random_cell(std::vector<Cell *> cell_selection)
     std::random_device rd;
     std::uniform_int_distribution<int> dist(0, cell_selection.size() - 1);
     int random_num = dist(rd);
-    Cell random_cell = *cell_selection[random_num];
-    return get_cell(random_cell.get_x(), random_cell.get_y());
+    return cell_selection[random_num]; // Return pointer to the selected cell
 }
 
-Cell &Grid::get_random_cell()
+Cell *Grid::get_random_cell()
 {
-    // Seed for the random number generator
     std::random_device rd;
-    // Initialize the random number generator
-    std::mt19937 gen(rd());
-    // Generate a random index within the range of valid indices for the vector
-    std::uniform_int_distribution<> dis(0, cell_vec.size() - 1);
-    int random_index_x = dis(gen);
-    int random_index_y = dis(gen);
-    // Return the random element
-    return cell_vec[random_index_x][random_index_y];
+    std::uniform_int_distribution<int> dist_rows(0, num_rows - 1);
+    std::uniform_int_distribution<int> dist_columns(0, num_colums - 1); // Corrected variable name
+    int random_num_rows = dist_rows(rd);
+    int random_num_columns = dist_columns(rd);
+    return get_cell(random_num_rows, random_num_columns);
 }
 
 void Grid::create_grid()
@@ -79,36 +74,37 @@ void Grid::reset(sf::RenderWindow &window)
 
 std::vector<Cell *> Grid::get_unvisited_neighbours(int x, int y)
 {
-    // first checkaround the givien cordinades and return the first all unvisted neighbors
-    std::vector<Cell *> unvisited_neighbors;
-    // is a valid cell given? Return empty vector if the coordinates are out of bounds from the Grid
+    // First, check if the coordinates are within the grid bounds
     if (x < 0 || x >= num_colums || y < 0 || y >= num_rows)
     {
-        return unvisited_neighbors;
+        return {}; // Return an empty vector if the coordinates are out of bounds
     }
-    // check if top cell is option
+
+    std::vector<Cell *> unvisited_neighbors;
+
+    // Check if the top cell is within bounds and unvisited
     if (y > 0 && !cell_vec[y - 1][x].get_visited())
     {
         unvisited_neighbors.push_back(&cell_vec[y - 1][x]);
     }
-    // check if bottom cell is option
+    // Check if the bottom cell is within bounds and unvisited
     if (y < num_rows - 1 && !cell_vec[y + 1][x].get_visited())
     {
         unvisited_neighbors.push_back(&cell_vec[y + 1][x]);
     }
-    // check if left cell is option
+    // Check if the left cell is within bounds and unvisited
     if (x > 0 && !cell_vec[y][x - 1].get_visited())
     {
         unvisited_neighbors.push_back(&cell_vec[y][x - 1]);
     }
-    // check if right cell is option
+    // Check if the right cell is within bounds and unvisited
     if (x < num_colums - 1 && !cell_vec[y][x + 1].get_visited())
     {
         unvisited_neighbors.push_back(&cell_vec[y][x + 1]);
     }
+
     return unvisited_neighbors;
 }
-
 void Grid::connect_cells(Cell &cell1, Cell &cell2)
 {
     int x1 = cell1.get_x();

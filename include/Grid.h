@@ -9,12 +9,12 @@ class Grid
 private:
     int num_rows;
     int num_colums;
-    float cell_size;
-    float wall_size;
+    int cell_size;
+    int wall_size;
     std::vector<std::vector<Cell>> cell_vec;
 
 public:
-    Grid(int rows, int colums, float cell_size, float wall_size);
+    Grid(int rows, int colums, int cell_size, int wall_size);
     int get_rows() { return num_rows; };
     int get_colums() { return num_colums; };
 
@@ -26,9 +26,9 @@ public:
     // TODO: funcs for later Maze generating
     std::vector<Cell *> get_unvisited_neighbours(int x, int y);
     void connect_cells(Cell &cell1, Cell &cell2);
-    Cell &get_cell(int row, int colum);
-    Cell &get_random_cell();
-    Cell &select_random_cell(std::vector<Cell *> cells);
+    Cell *get_cell(int row, int colum);
+    Cell *get_random_cell();
+    Cell *select_random_cell(std::vector<Cell *> &cell_selection);
     // TODO: Needed?
     void set_cell_active();
 };
