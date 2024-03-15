@@ -145,10 +145,14 @@ void Maze_Generator::prim(Grid &maze_grid, sf::RenderWindow &window)
         std::vector<Cell *> unvisited_neighbors = maze_grid.get_unvisited_neighbours(current_cell->get_x(), current_cell->get_y());
         for (Cell *neighbor : unvisited_neighbors)
         {
-            // Mark the unvisited neighbor as frontier and add it to the frontier vector
-            neighbor->set_type(Frontier);
-            frontier_vec.push_back(neighbor);
-            neighbor->draw(window);
+            // Check if the neighbor is not already in the frontier vector
+            if (std::find(frontier_vec.begin(), frontier_vec.end(), neighbor) == frontier_vec.end())
+            {
+                // Mark the unvisited neighbor as frontier and add it to the frontier vector
+                neighbor->set_type(Frontier);
+                frontier_vec.push_back(neighbor);
+                neighbor->draw(window);
+            }
         }
 
         // Get visited neighbors of the current cell
