@@ -71,6 +71,9 @@ void Cell::set_type(Type type)
     case Type::Finished:
         cell_type = Finished;
         break;
+    case Type::Frontier:
+        cell_type = Frontier;
+        break;
     }
 }
 void Cell::set_cellColor() const
@@ -92,6 +95,9 @@ void Cell::set_cellColor() const
     case Finished:
         cell_body.setFillColor(sf::Color::Yellow);
         break;
+    case Frontier:
+        cell_body.setFillColor(sf::Color(255, 192, 203));
+        break;
     }
 }
 
@@ -112,7 +118,7 @@ void Cell::draw(sf::RenderWindow &window) const
 void Cell::reset(sf::RenderWindow &window)
 {
     isaktiv = false;
-    visited = false;
+    set_unvisited();
     for (int i = 0; i < 4; ++i)
     {
         walls[i] = true;

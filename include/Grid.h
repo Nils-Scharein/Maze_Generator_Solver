@@ -25,6 +25,7 @@ public:
 
     // TODO: funcs for later Maze generating
     std::vector<Cell *> get_unvisited_neighbours(int x, int y);
+    std::vector<Cell *> get_visited_neighbours(int x, int y);
     void connect_cells(Cell &cell1, Cell &cell2);
     Cell *get_cell(int row, int colum);
     Cell *get_random_cell();

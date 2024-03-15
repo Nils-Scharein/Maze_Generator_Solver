@@ -9,7 +9,8 @@ enum Type
     End,
     Visited,
     Neutral,
-    Finished
+    Finished,
+    Frontier
 };
 class Cell
 {
@@ -44,6 +45,7 @@ public:
     // Setter
     void set_type(Type type);
     void set_visited() { visited = true; };
+    void set_unvisited() { visited = false; };
     void set_isaktive() { isaktiv = true; };
     void set_cellColor() const; // cell_body is mutable
     void set_size(int new_size) { size = new_size; };

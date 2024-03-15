@@ -41,13 +41,13 @@ void Applikation::poolevent()
             }
             else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1))
             {
-                // TODO: Maze Generator 1
-                std::cout << "Pressed Generator 1\n";
+                maze_gen.set_choise(Choice_generator::depth_first);
+                maze_gen.reset(grid, Applikation_window);
             }
             else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2))
             {
-                // TODO: Maze Generator 2
-                std::cout << "Pressed Generator 2\n";
+                maze_gen.set_choise(Choice_generator::prim);
+                maze_gen.reset(grid, Applikation_window);
             }
         }
     }

@@ -9,7 +9,7 @@
 class Applikation
 {
 private:
-    int CELLSIZE = 10;
+    int CELLSIZE = 60;
     int WALLSIZE = 2;
     int WINDOW_HIGHT = (1200);
     int WINDOW_WIGHT = (1800);

@@ -105,6 +105,40 @@ std::vector<Cell *> Grid::get_unvisited_neighbours(int x, int y)
 
     return unvisited_neighbors;
 }
+
+std::vector<Cell *> Grid::get_visited_neighbours(int x, int y)
+{
+    // First, check if the coordinates are within the grid bounds
+    if (x < 0 || x >= num_colums || y < 0 || y >= num_rows)
+    {
+        return {}; // Return an empty vector if the coordinates are out of bounds
+    }
+
+    std::vector<Cell *> visited_neighbors;
+
+    // Check if the top cell is within bounds and unvisited
+    if (y > 0 && cell_vec[y - 1][x].get_visited())
+    {
+        visited_neighbors.push_back(&cell_vec[y - 1][x]);
+    }
+    // Check if the bottom cell is within bounds and unvisited
+    if (y < num_rows - 1 && cell_vec[y + 1][x].get_visited())
+    {
+        visited_neighbors.push_back(&cell_vec[y + 1][x]);
+    }
+    // Check if the left cell is within bounds and unvisited
+    if (x > 0 && cell_vec[y][x - 1].get_visited())
+    {
+        visited_neighbors.push_back(&cell_vec[y][x - 1]);
+    }
+    // Check if the right cell is within bounds and unvisited
+    if (x < num_colums - 1 && cell_vec[y][x + 1].get_visited())
+    {
+        visited_neighbors.push_back(&cell_vec[y][x + 1]);
+    }
+
+    return visited_neighbors;
+}
 void Grid::connect_cells(Cell &cell1, Cell &cell2)
 {
     int x1 = cell1.get_x();
