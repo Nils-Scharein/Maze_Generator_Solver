@@ -26,6 +26,8 @@ public:
     std::stack<Cell *> stack;
     std::vector<Cell *> frontier_vec;
 
+    Choice_generator get_selected_gen() { return choise; };
+
     // setter
     void set_run_maze_on() { run_generator = true; };
     void set_run_maze_off() { run_generator = false; };

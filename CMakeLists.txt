@@ -8,6 +8,7 @@ set(SFML_VERSION "2.6.1")
 
 #include
 include_directories(include)
+include_directories(ressources)
 
 # Fetch SFML
 include(FetchContent)

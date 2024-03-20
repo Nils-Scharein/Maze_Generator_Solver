@@ -16,6 +16,7 @@ public:
     Settings_Window(int Hight, int Width, int Offset);
     void update(sf::RenderWindow &window, Maze_Generator maze_gen, Maze_Solver maze_solv);
     sf::Text Generator_Message;
+    sf::Text generator_selected;
     sf::Font myfont;
 };
 
