@@ -123,7 +123,8 @@ void Cell::reset(sf::RenderWindow &window)
     {
         walls[i] = true;
     }
-    cell_type = Type::Neutral;
+    set_type(Type::Neutral);
+    draw(window);
 }
 
 void Cell::turn_wall_off(int wall)

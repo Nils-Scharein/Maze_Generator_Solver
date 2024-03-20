@@ -20,6 +20,8 @@ private:
     int y;
     bool visited;
     bool isaktiv;
+    float gcost;
+    float fcost;
     int size;
     int thickness_wall;
     Type cell_type = Neutral;
@@ -41,8 +43,12 @@ public:
     int get_y() const { return y; };
     bool get_visited() const { return visited; };
     bool get_isaktive() const { return isaktiv; };
+    float get_gcost() { return gcost; };
+    float get_fcost() { return fcost; };
 
     // Setter
+    void set_gcost(float new_gcost) { gcost = new_gcost; };
+    void set_fcost(float new_fcost) { fcost = new_fcost; };
     void set_type(Type type);
     void set_visited() { visited = true; };
     void set_unvisited() { visited = false; };

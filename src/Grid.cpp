@@ -8,6 +8,10 @@ Grid::Grid(int rows, int colums, int cell_size, int wall_size)
     : num_rows{rows}, num_colums{colums}, cell_size{cell_size}, wall_size{wall_size}
 {
     create_grid();
+    Cell *startcell = get_cell(0, 0);
+    startcell->set_type(Type::Start);
+    Cell *End = get_cell((colums - 1), (rows - 1));
+    End->set_type(Type::End);
 }
 
 Cell *Grid::get_cell(int column, int row)
@@ -63,6 +67,7 @@ void Grid::draw_grid(sf::RenderWindow &window) const
 }
 void Grid::reset(sf::RenderWindow &window)
 {
+    window.clear();
     for (auto &row : cell_vec)
     {
         for (Cell &single_cell : row)

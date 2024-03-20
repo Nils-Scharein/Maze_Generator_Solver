@@ -1,12 +1,12 @@
-#include "Mazegenerator.h"
+#include <Mazegenerator.h>
 #include <Grid.h>
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <stack>
 
 Maze_Generator::Maze_Generator()
-    : run_maze{false},
-      choise{Choice_generator::depth_first},
+    : run_generator{false},
+      choise{Choice_generator::None_gen},
       deph_init{false},
       prim_init{false}
 {
@@ -14,12 +14,12 @@ Maze_Generator::Maze_Generator()
 
 void Maze_Generator::toggle_run()
 {
-    run_maze = !run_maze;
+    run_generator = !run_generator;
 }
 
 void Maze_Generator::update_generate_with_choosen(Grid &grid, sf::RenderWindow &window)
 {
-    if (run_maze)
+    if (run_generator)
     {
         if (choise == Choice_generator::depth_first)
         {
@@ -46,21 +46,19 @@ void Maze_Generator::depth_first_search_stack(Grid &maze_grid, sf::RenderWindow 
     */
     if (!deph_init)
     {
-        Cell *start_cell = maze_grid.get_cell(0, 0); // Store the pointer to the random cell
+        Cell *start_cell = maze_grid.get_cell(0, 0);
         start_cell->set_visited();
-        start_cell->set_type(Type::Start);
-        maze_grid.get_cell((maze_grid.get_colums() - 1), (maze_grid.get_rows() - 1))->set_type(Type::End);
         stack.push(start_cell);
         maze_grid.draw_grid(window);
         deph_init = true;
     }
-    if (!run_maze)
+    if (!run_generator)
     {
         return;
     }
     if (stack.empty())
     {
-        run_maze = false;
+        run_generator = false;
         return;
     }
     if (!stack.empty())
@@ -98,11 +96,6 @@ void Maze_Generator::prim(Grid &maze_grid, sf::RenderWindow &window)
     if (!prim_init)
     {
         Cell *startcell = maze_grid.get_cell(0, 0);
-        startcell->set_type(Type::Start);
-        Cell *End = maze_grid.get_cell((maze_grid.get_colums() - 1), (maze_grid.get_rows() - 1));
-        End->set_type(Type::End);
-        End->draw(window);
-
         // Mark the start cell as visited and add its unvisited neighbors to the frontier
         startcell->set_visited();
         startcell->set_type(Finished);
@@ -174,7 +167,7 @@ void Maze_Generator::reset(Grid &grid, sf::RenderWindow &window)
 {
     window.clear();
     grid.reset(window);
-    run_maze = false;
+    run_generator = false;
     while (!stack.empty())
     {
         stack.pop();
@@ -182,5 +175,4 @@ void Maze_Generator::reset(Grid &grid, sf::RenderWindow &window)
     frontier_vec.clear();
     deph_init = false;
     prim_init = false;
-    grid.draw_grid(window);
 }

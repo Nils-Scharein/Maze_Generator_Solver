@@ -1,4 +1,4 @@
-#include "Applikation.h"
+#include <Applikation.h>
 #include <chrono>
 #include <thread>
 #include <iostream>
@@ -6,10 +6,13 @@
 #include <random>
 
 Applikation::Applikation()
-    : Applikation_window(sf::VideoMode(WINDOW_WIGHT, WINDOW_HIGHT), "Maze Generator"),
+    : Applikation_window(sf::VideoMode(MAZE_WIGHT + SETTINGSWINDOW_WIGHT, MAZE_HIGHT), "Maze Generator"),
       grid(num_rows, num_columns, CELLSIZE, WALLSIZE),
-      maze_gen()
+      maze_gen(),
+      maze_solv(),
+      settings_window(MAZE_HIGHT, SETTINGSWINDOW_WIGHT, MAZE_WIGHT)
 {
+    // Applikation_window.setFramerateLimit(1000);
 }
 
 void Applikation::poolevent()
@@ -49,13 +52,12 @@ void Applikation::poolevent()
                 maze_gen.set_choise(Choice_generator::prim);
                 maze_gen.reset(grid, Applikation_window);
             }
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num3))
+            {
+                maze_solv.set_choise(Choice_solver::a_star);
+            }
         }
     }
-}
-
-void Applikation::update_maze()
-{
-    // TODO: Dession + Create + Render Maze Generator // Maze Solver comes later
 }
 
 void Applikation::run()
@@ -65,6 +67,7 @@ void Applikation::run()
     {
         poolevent();
         render();
+        settings_window.update(Applikation_window, maze_gen, maze_solv);
     }
 }
 
