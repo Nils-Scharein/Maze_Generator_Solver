@@ -26,7 +26,9 @@ public:
     std::stack<Cell *> stack;
     std::vector<Cell *> frontier_vec;
 
-    Choice_generator get_selected_gen() { return choise; };
+    // getter
+    // TODO: Write getter with Char not Enum
+    char get_selected_gen();
 
     // setter
     void set_run_maze_on() { run_generator = true; };
