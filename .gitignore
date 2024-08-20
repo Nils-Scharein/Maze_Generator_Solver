@@ -1,5 +1,42 @@
-# CMake
+# Ignore build directories
 /build*
+/out/build*
+/out/
 
-# Visual Studio Code
+# Ignore Visual Studio Code settings
 /.vscode
+
+# Ignore Visual Studio specific files
+.vs/
+.vs/*.json
+.vs/*.sqlite
+.vs/**/*.vsidx
+.vs/**/ipch/
+.vs/**/Browse.VC.*
+.vs/**/DocumentLayout.json
+.vs/**/Solution.VC.db
+.vs/**/slnx.sqlite
+.vs/**/cmake.db
+
+# Ignore CMake generated files
+/CMakeCache.txt
+/CMakeFiles/
+/CMakeScripts/
+/Testing/
+/Makefile
+/TargetDirectories.txt
+/cmake_install.cmake
+/_deps/
+
+# Ignore specific file types
+*.ilk
+*.pdb
+*.obj
+*.log
+*.db
+*.dir
+*.res
+*.manifest
+*.opendb
+*.vcxproj.user
+*.suo
