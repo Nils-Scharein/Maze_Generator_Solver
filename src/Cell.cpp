@@ -101,21 +101,7 @@ void Cell::set_cellColor() const
     }
 }
 
-void Cell::draw(sf::RenderWindow &window) const
-{
-    set_cellColor();
-    window.draw(cell_body);
-    if (walls[0]) // North
-        window.draw(wall_n);
-    if (walls[1]) // East
-        window.draw(wall_e);
-    if (walls[2]) // south
-        window.draw(wall_s);
-    if (walls[3]) // west
-        window.draw(wall_w);
-}
-
-void Cell::reset(sf::RenderWindow &window)
+void Cell::reset()
 {
     isaktiv = false;
     set_unvisited();
@@ -124,7 +110,6 @@ void Cell::reset(sf::RenderWindow &window)
         walls[i] = true;
     }
     set_type(Type::Neutral);
-    draw(window);
 }
 
 void Cell::turn_wall_off(int wall)

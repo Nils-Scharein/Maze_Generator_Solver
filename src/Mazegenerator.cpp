@@ -49,7 +49,8 @@ void Maze_Generator::depth_first_search_stack(Grid &maze_grid, sf::RenderWindow 
         Cell *start_cell = maze_grid.get_cell(0, 0);
         start_cell->set_visited();
         stack.push(start_cell);
-        maze_grid.draw_grid(window);
+        Grid::mark_cell_for_redraw(*start_cell);
+        maze_grid.create_grid();
         deph_init = true;
     }
     if (!run_generator)
@@ -74,7 +75,7 @@ void Maze_Generator::depth_first_search_stack(Grid &maze_grid, sf::RenderWindow 
             neighbour->set_visited();
             neighbour->set_type(Type::Visited);
             stack.push(neighbour); // Push the pointer to the neighbor cell
-            neighbour->draw(window);
+            Grid::mark_cell_for_redraw(*currentCell);
             window.display();
         }
         else
@@ -82,7 +83,7 @@ void Maze_Generator::depth_first_search_stack(Grid &maze_grid, sf::RenderWindow 
             // If the current cell has no unvisited neighbors, backtrack
             stack.pop();
             currentCell->set_type(Type::Finished);
-            currentCell->draw(window);
+            Grid::mark_cell_for_redraw(*currentCell);
             window.display();
         }
 
@@ -99,7 +100,7 @@ void Maze_Generator::prim(Grid &maze_grid, sf::RenderWindow &window)
         // Mark the start cell as visited and add its unvisited neighbors to the frontier
         startcell->set_visited();
         startcell->set_type(Finished);
-        startcell->draw(window);
+        Grid::mark_cell_for_redraw(*startcell);
         std::vector<Cell *> frontier = maze_grid.get_unvisited_neighbours(startcell->get_x(), startcell->get_y());
         for (Cell *single_frontier : frontier)
         {
@@ -110,7 +111,7 @@ void Maze_Generator::prim(Grid &maze_grid, sf::RenderWindow &window)
         // Draw the start cell and the frontier cells
         for (Cell *frontier_cell : frontier)
         {
-            frontier_cell->draw(window);
+            Grid::mark_cell_for_redraw(*frontier_cell);
         }
         window.display();
 
@@ -123,7 +124,7 @@ void Maze_Generator::prim(Grid &maze_grid, sf::RenderWindow &window)
         Cell *current_cell = maze_grid.select_random_cell(frontier_vec);
         current_cell->set_visited();
         current_cell->set_type(Finished);
-        current_cell->draw(window);
+        Grid::mark_cell_for_redraw(*current_cell);
 
         // Remove the current cell from the frontier
         std::vector<Cell *>::iterator it = std::find(frontier_vec.begin(), frontier_vec.end(), current_cell);
@@ -144,7 +145,7 @@ void Maze_Generator::prim(Grid &maze_grid, sf::RenderWindow &window)
                 // Mark the unvisited neighbor as frontier and add it to the frontier vector
                 neighbor->set_type(Frontier);
                 frontier_vec.push_back(neighbor);
-                neighbor->draw(window);
+                Grid::mark_cell_for_redraw(*neighbor);
             }
         }
 
@@ -155,8 +156,8 @@ void Maze_Generator::prim(Grid &maze_grid, sf::RenderWindow &window)
             // Connect the current cell to a random visited neighbor
             Cell *random_visited_neighbour = maze_grid.select_random_cell(visited_neighbours);
             maze_grid.connect_cells(*current_cell, *random_visited_neighbour);
-            current_cell->draw(window);
-            random_visited_neighbour->draw(window);
+            Grid::mark_cell_for_redraw(*current_cell);
+            Grid::mark_cell_for_redraw(*random_visited_neighbour);
         }
 
         window.display();
@@ -166,7 +167,7 @@ void Maze_Generator::prim(Grid &maze_grid, sf::RenderWindow &window)
 void Maze_Generator::reset(Grid &grid, sf::RenderWindow &window)
 {
     window.clear();
-    grid.reset(window);
+    grid.reset_grid_state();
     run_generator = false;
     while (!stack.empty())
     {

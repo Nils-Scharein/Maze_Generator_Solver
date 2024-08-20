@@ -27,7 +27,6 @@ public:
     std::vector<Cell *> frontier_vec;
 
     // getter
-    // TODO: Write getter with Char not Enum
     char get_selected_gen();
 
     // setter

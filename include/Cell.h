@@ -2,6 +2,7 @@
 #define Cell_H
 
 #include <SFML/Graphics.hpp>
+#include <array>
 // Decides Color and how to interact with the cell
 enum Type
 {
@@ -32,7 +33,7 @@ private:
     // [2] = South
     // [3] = West (Left)
 
-    bool walls[4] = {true, true, true, true}; // sets if the Cell has Walls or not
+    std::array<bool, 4> walls = { true, true, true, true };
 
 public:
     // constructor + deconstructor
@@ -45,6 +46,8 @@ public:
     bool get_isaktive() const { return isaktiv; };
     float get_gcost() { return gcost; };
     float get_fcost() { return fcost; };
+    const std::array<bool, 4>& get_walls() const { return walls; }
+
 
     // Setter
     void set_gcost(float new_gcost) { gcost = new_gcost; };
@@ -57,9 +60,7 @@ public:
     void set_size(int new_size) { size = new_size; };
 
     // funcs
-    void
-    draw(sf::RenderWindow &window) const;
-    void reset(sf::RenderWindow &window);
+    void reset();
     void turn_wall_off(int wall);
 
     // helper

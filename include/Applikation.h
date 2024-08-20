@@ -18,6 +18,7 @@ private:
     int num_rows = MAZE_HIGHT / (int)CELLSIZE;
     int num_columns = MAZE_WIGHT / (int)CELLSIZE;
     sf::RenderWindow Applikation_window;
+    MazeRenderer renderer;
     Grid grid;
     Maze_Generator maze_gen;
     Maze_Solver maze_solv;

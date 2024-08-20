@@ -16,7 +16,7 @@ set(BUILD_SHARED_LIBS OFF)
 FetchContent_Declare(
     SFML
     GIT_REPOSITORY https://github.com/SFML/SFML.git
-    GIT_TAG        "2.6.1"  # Stelle sicher, dass dies mit der SFML-Version übereinstimmt, die du verwenden möchtest
+    GIT_TAG        "2.6.1"
 )
 FetchContent_MakeAvailable(SFML)
 set(CMAKE_CXX_STANDARD 17)
@@ -27,7 +27,7 @@ file(GLOB SOURCES
     src/*.cpp
 )
 
-add_executable(Maze_Generator_Solvere ${SOURCES})
+add_executable(Maze_Generator_Solvere ${SOURCES} )
 
 # Link SFML libraries
 target_link_libraries(Maze_Generator_Solvere sfml-graphics)

@@ -40,7 +40,7 @@ void Maze_Solver::toggle_run()
 }
 void Maze_Solver::reset(Grid &grid, sf::RenderWindow &window)
 {
-    grid.reset(window);
+    grid.reset_grid_state();
     run_solver = false;
     a_star_init = false;
 }

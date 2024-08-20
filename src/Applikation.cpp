@@ -62,17 +62,19 @@ void Applikation::poolevent()
 
 void Applikation::run()
 {
-    grid.draw_grid(Applikation_window);
+    grid.create_grid();
     while (Applikation_window.isOpen())
     {
         poolevent();
         render();
-        settings_window.update(Applikation_window, maze_gen, maze_solv);
     }
 }
 
 void Applikation::render()
 {
     maze_gen.update_generate_with_choosen(grid, Applikation_window);
+    settings_window.update(Applikation_window, maze_gen, maze_solv);
+    renderer.render_given_cells(grid.get_cells_to_redraw(), Applikation_window);
+    grid.clear_cells_for_redraw();
     Applikation_window.display();
 }

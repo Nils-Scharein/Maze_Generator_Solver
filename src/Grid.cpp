@@ -3,6 +3,7 @@
 #include <vector>
 #include <random>
 #include <iostream>
+#include <MazeRenderer.h>
 
 Grid::Grid(int rows, int colums, int cell_size, int wall_size)
     : num_rows{rows}, num_colums{colums}, cell_size{cell_size}, wall_size{wall_size}
@@ -13,6 +14,8 @@ Grid::Grid(int rows, int colums, int cell_size, int wall_size)
     Cell *End = get_cell((colums - 1), (rows - 1));
     End->set_type(Type::End);
 }
+
+std::vector<Cell*> Grid::cells_to_redraw;
 
 Cell *Grid::get_cell(int column, int row)
 {
@@ -55,24 +58,14 @@ void Grid::create_grid()
     }
 }
 
-void Grid::draw_grid(sf::RenderWindow &window) const
+void Grid::reset_grid_state()
 {
-    for (const auto &row : cell_vec)
-    {
-        for (const Cell &single_cell : row)
-        {
-            single_cell.draw(window);
-        }
-    }
-}
-void Grid::reset(sf::RenderWindow &window)
-{
-    window.clear();
     for (auto &row : cell_vec)
     {
         for (Cell &single_cell : row)
         {
-            single_cell.reset(window);
+            single_cell.reset();
+            mark_cell_for_redraw(single_cell);
         }
     }
 }
@@ -191,4 +184,28 @@ void Grid::connect_cells(Cell &cell1, Cell &cell2)
     {
         std::cout << "ERROR CONNECT CELLS\n";
     }
+}
+
+std::vector < Cell*> Grid::get_all_cell_Pointers()
+{
+    std::vector<Cell*> cell_ptrs;
+
+    for (auto& row : cell_vec) 
+    {
+        for (auto& cell : row) 
+        {
+            cell_ptrs.push_back(&cell);
+        }
+    }
+    return cell_ptrs;
+}
+
+void Grid::mark_cell_for_redraw(Cell& cell)
+{
+    cells_to_redraw.push_back(&cell);
+}
+
+void Grid::clear_cells_for_redraw()
+{
+    cells_to_redraw.clear();
 }
