@@ -10,7 +10,7 @@
 class Applikation
 {
 private:
-    int CELLSIZE = 40;
+    int CELLSIZE = 20;
     int WALLSIZE = 2;
     int MAZE_HIGHT = 800;
     int MAZE_WIGHT = 1400;

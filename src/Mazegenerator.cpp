@@ -76,7 +76,6 @@ void Maze_Generator::depth_first_search_stack(Grid &maze_grid, sf::RenderWindow 
             neighbour->set_type(Type::Visited);
             stack.push(neighbour); // Push the pointer to the neighbor cell
             Grid::mark_cell_for_redraw(*currentCell);
-            window.display();
         }
         else
         {
@@ -84,11 +83,7 @@ void Maze_Generator::depth_first_search_stack(Grid &maze_grid, sf::RenderWindow 
             stack.pop();
             currentCell->set_type(Type::Finished);
             Grid::mark_cell_for_redraw(*currentCell);
-            window.display();
         }
-
-        // Display the updated window
-        window.display();
     }
 }
 
@@ -159,14 +154,11 @@ void Maze_Generator::prim(Grid &maze_grid, sf::RenderWindow &window)
             Grid::mark_cell_for_redraw(*current_cell);
             Grid::mark_cell_for_redraw(*random_visited_neighbour);
         }
-
-        window.display();
     }
 }
 
 void Maze_Generator::reset(Grid &grid, sf::RenderWindow &window)
 {
-    window.clear();
     grid.reset_grid_state();
     run_generator = false;
     while (!stack.empty())

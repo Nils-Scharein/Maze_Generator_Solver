@@ -63,6 +63,7 @@ void Applikation::poolevent()
 void Applikation::run()
 {
     grid.create_grid();
+    renderer.render_given_cells(grid.get_all_cell_Pointers(), Applikation_window);
     while (Applikation_window.isOpen())
     {
         poolevent();

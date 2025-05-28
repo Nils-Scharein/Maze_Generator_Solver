@@ -27,6 +27,7 @@ Settings_Window::Settings_Window(int Hight, int Width, int Offset)
     solver_selected.setString("test");
     solver_selected.setCharacterSize(24);
     solver_selected.setPosition(offset + 155, 210);
+
 }
 
 void Settings_Window::update(sf::RenderWindow &window, Maze_Generator maze_gen, Maze_Solver maze_solv)
