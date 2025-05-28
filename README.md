@@ -29,9 +29,9 @@ Here's an animated preview of how the application works:
 
 ### depth first search stack
 
-![depth first](./depth_first_search_stack.gif)
+![depth first](./Demo/depth_first_search_stack.gif)
 
 ### prim
 
-![prim](./prim.gif)
+![prim](./Demo/prim.gif)
 
