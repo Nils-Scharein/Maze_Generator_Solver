@@ -1,24 +1,24 @@
 # Maze_Generator_Solver
 
-Dies ist ein Übungsprojekt in **C++**, das ursprünglich zur experimentellen Erkundung der Grafikbibliothek **[SFML 2.6.1](https://github.com/SFML/SFML)** erstellt wurde.
+This is a practice project in **C++**, originally created to experimentally explore the graphics library **[SFML 2.6.1](https://github.com/SFML/SFML)**.
 
-## Ziel des Projekts
+## Project Goal
 
-Ziel war es, grundlegende Mechanismen zur Darstellung und Steuerung von grafischen Objekten mithilfe von SFML zu erlernen und umzusetzen – insbesondere in Hinblick auf einfache Spiel- oder Simulationslogik (z. B. Maze- oder Grid-Systeme).
+The goal was to learn and implement basic mechanisms for displaying and controlling graphical objects using SFML — especially with regard to simple game or simulation logic (e.g., maze or grid systems).
 
-## Verwendete Technologien
+## Technologies Used
 
 - **C++**
 - **[SFML 2.6.1](https://github.com/SFML/SFML)**
 
 ## Status
 
-> ❌ **Dieses Projekt wurde verworfen.**
+> ❌ **This project has been discontinued.**
 
-Die Arbeit an diesem Projekt wurde eingestellt, da es im Verlauf zugunsten einer umfangreicheren und strukturierteren Umsetzung mit **Qt** weiterentwickelt wurde.
+Development on this project has been stopped in favor of a more comprehensive and structured implementation using **Qt**.
 
-## Nachfolgeprojekt
+## Successor Project
 
-Die Weiterentwicklung dieses Konzepts – inklusive einer benutzerfreundlichen Oberfläche und besserer Wartbarkeit – findet sich im Projekt:
+The further development of this concept — including a user-friendly interface and better maintainability — can be found in the project:
 
 👉 [MazeQT](https://github.com/Nils-Scharein/MazeQT)
