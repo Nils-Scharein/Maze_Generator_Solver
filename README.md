@@ -1,4 +1,4 @@
-# Uebung_C--
+# Maze_Generator_Solver
 
 Dies ist ein Übungsprojekt in **C++**, das ursprünglich zur experimentellen Erkundung der Grafikbibliothek **[SFML 2.6.1](https://github.com/SFML/SFML)** erstellt wurde.
 
